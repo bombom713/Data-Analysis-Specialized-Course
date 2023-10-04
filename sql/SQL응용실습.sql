@@ -54,20 +54,20 @@ select date_trunc('second',timestamp '2013-07-30 20:38:40');
 
 
 select EMP_NAME, to_char((current_timestamp - ENT_DATE),'w') weeks
-from cslee.TB_EMP
+from <filenm>.TB_EMP
 where ORG_CD='10';
 
 select emp_name, ent_date,
-	to_char(ent_date,'yyyy') ÀÔ»ç³â,
-	to_char(ent_date,'mm') ÀÔ»ç¿ù,
-	to_char(ent_date,'dd') ÀÔ»çÀÏ
-from cslee.tb_emp;
+	to_char(ent_date,'yyyy') ì…ì‚¬ë…„,
+	to_char(ent_date,'mm') ì…ì‚¬ì›”,
+	to_char(ent_date,'dd') ì…ì‚¬ì¼
+from <filenm>.tb_emp;
 
 select emp_name, ent_date,
-extract('year' from ent_date) ÀÔ»ç³â,
-extract('month' from ent_date) ÀÔ»ç¿ù,
-extract('day' from ent_date) ÀÔ»çÀÏ
-from cslee.tb_emp;
+extract('year' from ent_date) ì…ì‚¬ë…„,
+extract('month' from ent_date) ì…ì‚¬ì›”,
+extract('day' from ent_date) ì…ì‚¬ì¼
+from <filenm>.tb_emp;
 
 select to_date('05 Dec 2000', 'DD Mon YYYY');
 
@@ -90,24 +90,24 @@ select emp_name,
 	then salary
 	else 50000000
 	end as revised_salary
-from cslee.tb_emp;
+from <filenm>.tb_emp;
 
 select org_name,
 case org_name
-when '¿µ¾÷1ÆÀ' then 'Áö»ç'
-when '¿µ¾÷2ÆÀ' then 'Áö»ç'
-when '¿µ¾÷3ÆÀ' then 'Áö»ç'
-when '°æ¿µ°ü¸®ÆÀ' then 'º»»ç'
-else 'ÁöÁ¡'
+when 'ì˜ì—…1íŒ€' then 'ì§€ì‚¬'
+when 'ì˜ì—…2íŒ€' then 'ì§€ì‚¬'
+when 'ì˜ì—…3íŒ€' then 'ì§€ì‚¬'
+when 'ê²½ì˜ê´€ë¦¬íŒ€' then 'ë³¸ì‚¬'
+else 'ì§€ì '
 end as AREA
-	from cslee.tb_org;
+	from <filenm>.tb_org;
 	
 select emp_name,
 	   case   when salary >= 90000000 then 'high'
 		      when salary >= 60000000 then 'mid'
 		      else 'low'
 	   end    as salary_grade
-from cslee.tb_emp;
+from <filenm>.tb_emp;
 
 select emp_name, salary,
 	case when salary >= 50000000
@@ -117,114 +117,114 @@ select emp_name, salary,
 				else salary*0.5
 			end)
 	end as bonus
-from cslee.tb_emp;
+from <filenm>.tb_emp;
 
--- coalesce ÇÔ¼ö
+-- coalesce í•¨ìˆ˜
 select emp_name, position,
--- 			NVL(POSITION, '¾øÀ½'), -- oracle null Ã¼Å©ÇÕ¼ö
-		coalesce(position,'¾øÀ½') -- null Ã¼Å©ÇÔ¼ö
-from cslee.tb_emp;
+-- 			NVL(POSITION, 'ì—†ìŒ'), -- oracle null ì²´í¬í•©ìˆ˜
+		coalesce(position,'ì—†ìŒ') -- null ì²´í¬í•¨ìˆ˜
+from <filenm>.tb_emp;
 
 select emp_name, position,
 		case when position is null
-	then '¾øÀ½'
+	then 'ì—†ìŒ'
 			else position
-		end as Á÷Ã¥
-from cslee.tb_emp
+		end as ì§ì±…
+from <filenm>.tb_emp
 
 select coalesce(salary,0) sal
 from cslee.tb_emp
-where emp_name='±èÅÂÁø';
+where emp_name='ê¹€íƒœì§„';
 
 select max(salary) sal
-from cslee.tb_emp
-where emp_name='±èÅÂÁø';
+from <filenm>.tb_emp
+where emp_name='ê¹€íƒœì§„';
 
 select coalesce(max(salary), 9999) sal
-from cslee.tb_emp
-where emp_name='±èÅÂÁø';
+from <filenm>.tb_emp
+where emp_name='ê¹€íƒœì§„';
 
-select count(*) "ÀüÃ¼°Ç¼ö"
-	,count(position) "Á÷Ã¥°Ç¼ö"
-	,count(distinct position)"Á÷Ã¥Á¾·ù"
-	,max(salary)"ÃÖ´ë"
-	,min(salary)"ÃÖ¼Ò"
-	,avg(salary)"Æò±Õ"
-from cslee.tb_emp;
+select count(*) "ì „ì²´ê±´ìˆ˜"
+	,count(position) "ì§ì±…ê±´ìˆ˜"
+	,count(distinct position)"ì§ì±…ì¢…ë¥˜"
+	,max(salary)"ìµœëŒ€"
+	,min(salary)"ìµœì†Œ"
+	,avg(salary)"í‰ê· "
+from <filenm>.tb_emp;
 
-select position "Á÷Ã¥",
-count(*) "ÀÎ¿ø¼ö",
-min(salary) "ÃÖ¼Ò",
-max(salary) "ÃÖ´ë",
-avg(salary) "Æò±Õ"
-from cslee.tb_emp
+select position "ì§ì±…",
+count(*) "ì¸ì›ìˆ˜",
+min(salary) "ìµœì†Œ",
+max(salary) "ìµœëŒ€",
+avg(salary) "í‰ê· "
+from <filenm>.tb_emp
 group by position;
 
-select org_cd "ºÎ¼­",
-count(*) "ÀÎ¿ø¼ö",
-avg(salary) "Æò±Õ"
-from cslee.tb_emp
+select org_cd "ë¶€ì„œ",
+count(*) "ì¸ì›ìˆ˜",
+avg(salary) "í‰ê· "
+from <filenm>.tb_emp
 group by org_cd
 having count(*) >= 4
 
-select org_cd "ºÎ¼­",
-max(salary) "ÃÖ´ë"
-from cslee.tb_emp
+select org_cd "ë¶€ì„œ",
+max(salary) "ìµœëŒ€"
+from <filenm>.tb_emp
 group by org_cd
 having min(salary) <= 40000000;
 
 select org_cd, position, avg(salary)
-from cslee.tb_emp
-where position in ('°úÀå','´ë¸®','»ç¿ø')
+from <filenm>.tb_emp
+where position in ('ê³¼ì¥','ëŒ€ë¦¬','ì‚¬ì›')
 group by org_cd, position;
 
 select org_cd
-,avg(case position when '°úÀå' then salary end) "°úÀå"
-,avg(case position when '´ë¸®' then salary end) "´ë¸®"
-,avg(case position when '»ç¿ø' then salary end) "»ç¿ø"
-from cslee.tb_emp
-where position in ('°úÀå','´ë¸®','»ç¿ø')
+,avg(case position when 'ê³¼ì¥' then salary end) "ê³¼ì¥"
+,avg(case position when 'ëŒ€ë¦¬' then salary end) "ëŒ€ë¦¬"
+,avg(case position when 'ì‚¬ì›' then salary end) "ì‚¬ì›"
+from <filenm>.tb_emp
+where position in ('ê³¼ì¥','ëŒ€ë¦¬','ì‚¬ì›')
 group by org_cd;
 
 select org_cd,
-sum(coalesce((case position when 'ÆÀÀå' then 1 else 0 end),0)) "ÆÀÀå",
-sum(coalesce((case position when '°úÀå' then 1 else 0 end),0)) "°úÀå",
-sum(coalesce((case position when '´ë¸®' then 1 else 0 end),0)) "´ë¸®",
-sum(coalesce((case position when '»ç¿ø' then 1 else 0 end),0)) "»ç¿ø"
-from cslee.tb_emp
+sum(coalesce((case position when 'íŒ€ì¥' then 1 else 0 end),0)) "íŒ€ì¥",
+sum(coalesce((case position when 'ê³¼ì¥' then 1 else 0 end),0)) "ê³¼ì¥",
+sum(coalesce((case position when 'ëŒ€ë¦¬' then 1 else 0 end),0)) "ëŒ€ë¦¬",
+sum(coalesce((case position when 'ì‚¬ì›' then 1 else 0 end),0)) "ì‚¬ì›"
+from <filenm>.tb_emp
 group by org_cd;
 
 select org_cd,
-coalesce (sum(case position when 'ÆÀÀå' then 1 end),0) "ÆÀÀå",
-coalesce (sum(case position when '°úÀå' then 1 end),0) "°úÀå",
-coalesce (sum(case position when '´ë¸®' then 1 end),0) "´ë¸®",
-coalesce (sum(case position when '»ç¿ø' then 1 end),0) "»ç¿ø"
-from cslee.tb_emp
+coalesce (sum(case position when 'íŒ€ì¥' then 1 end),0) "íŒ€ì¥",
+coalesce (sum(case position when 'ê³¼ì¥' then 1 end),0) "ê³¼ì¥",
+coalesce (sum(case position when 'ëŒ€ë¦¬' then 1 end),0) "ëŒ€ë¦¬",
+coalesce (sum(case position when 'ì‚¬ì›' then 1 end),0) "ì‚¬ì›"
+from <filenm>.tb_emp
 group by org_cd;
 
 select tb_emp.emp_name, tb_emp.org_cd
 	,tb_org.org_cd, tb_org.org_name
-from cslee.tb_emp, cslee.tb_org
-where cslee.tb_emp.org_cd=cslee.tb_org.org_cd;
+from <filenm>.tb_emp, <filenm>.tb_org
+where <filenm>.tb_emp.org_cd=<filenm>.tb_org.org_cd;
 
 select tb_emp.emp_no,
 	tb_emp.emp_name,
 	tb_emp.org_cd,
 		tb_org.org_name,
 		tb_emp.position
-from cslee.tb_emp,
-	 cslee.tb_org
-where cslee.tb_emp.org_cd=cslee.tb_org.org_cd;
+from <filenm>.tb_emp,
+	 <filenm>.tb_org
+where <filenm>.tb_emp.org_cd=<filenm>.tb_org.org_cd;
 
 select e.emp_no,
 	e.emp_name,
 	e.org_cd,
 		o.org_name,
 		e.position
-from cslee.tb_emp as e,
-	 cslee.tb_org as o
+from <filenm>.tb_emp as e,
+	 <filenm>.tb_org as o
 where e.org_cd=o.org_cd
- and e.position='ÆÀÀå'
+ and e.position='íŒ€ì¥'
 order by o.org_name;
 
 select a.accno,
@@ -232,87 +232,87 @@ select a.accno,
 	p.prod_name,
 	a.cont_amt,
 	e.emp_name
-from cslee.tb_accnt a, cslee.tb_cust c, cslee.tb_prod p, cslee.tb_emp e
+from <filenm>.tb_accnt a, <filenm>.tb_cust c, <filenm>.tb_prod p, <filenm>.tb_emp e
 where a.cust_no=c.cust_no
 and a.prod_cd=p.prod_cd
 and a.manager=e.emp_no;
 
-select e.emp_name »ç¿ø¸í,
-	e.salary ¿¬ºÀ,
-	s.grade ±Ş¿©µî±Ş
-from cslee.tb_emp e, cslee.tb_grade s
+select e.emp_name ì‚¬ì›ëª…,
+	e.salary ì—°ë´‰,
+	s.grade ê¸‰ì—¬ë“±ê¸‰
+from <filenm>.tb_emp e, <filenm>.tb_grade s
 where e.salary
 between s.low_sal and s.high_sal;
 
 select emp.emp_no, emp.emp_name, org.org_name
-from cslee.tb_emp emp, cslee.tb_org org
+from <filenm>.tb_emp emp, <filenm>.tb_org org
 where emp.org_cd=org.org_cd;
 
 select emp.emp_no, emp.emp_name, org.org_name
-from cslee.tb_emp emp
-inner join cslee.tb_org org
+from <filenm>.tb_emp emp
+inner join <filenm>.tb_org org
 on emp.org_cd=org.org_cd;
 
 select emp.emp_no, emp.emp_name, org.org_name
-from cslee.tb_emp emp
-join cslee.tb_org org
+from <filenm>.tb_emp emp
+join <filenm>.tb_org org
 on emp.org_cd=org.org_cd;
 
 select acc.accno, acc.cust_no, cust.cust_name
-from cslee.tb_accnt acc
-inner join cslee.tb_cust cust
+from <filenm>.tb_accnt acc
+inner join <filenm>.tb_cust cust
 on (cust.cust_no=acc.cust_no);
 
 select e.emp_name, e.org_cd, o.org_cd, o.org_name
-from cslee.tb_emp e
-join cslee.tb_org o
+from <filenm>.tb_emp e
+join <filenm>.tb_org o
   on (e.org_cd=o.org_cd)
 where e.org_cd='10';
 
-select a.accno °èÁÂ¹øÈ£, c.cust_name °í°´¸í, p.prod_name »óÇ°¸í
-	, a.cont_amt °è¾à±İ¾×, e.emp_name ´ã´çÀÚ¸í
-from cslee.tb_accnt a, cslee. tb_cust c, cslee.tb_prod p, cslee.tb_emp e
+select a.accno ê³„ì¢Œë²ˆí˜¸, c.cust_name ê³ ê°ëª…, p.prod_name ìƒí’ˆëª…
+	, a.cont_amt ê³„ì•½ê¸ˆì•¡, e.emp_name ë‹´ë‹¹ìëª…
+from <filenm>.tb_accnt a, <filenm>. tb_cust c, <filenm>.tb_prod p, <filenm>.tb_emp e
 where a.cust_no=c.cust_no
 and a.prod_cd=p.prod_cd
 and a.manager=e.emp_no;
 
-select a.accno °èÁÂ¹øÈ£, c.cust_name °í°´¸í, p.prod_name »óÇ°¸í
-	,a.cont_amt °è¾à¹øÈ£, e.emp_name ´ã´çÀÚ¸í
-from cslee.tb_accnt a
-inner join cslee.tb_cust c on a.cust_no=c.cust_no
-inner join cslee.tb_prod p on a.prod_cd=p.prod_cd
-inner join cslee.tb_emp e on a.manager=e.emp_no;
+select a.accno ê³„ì¢Œë²ˆí˜¸, c.cust_name ê³ ê°ëª…, p.prod_name ìƒí’ˆëª…
+	,a.cont_amt ê³„ì•½ë²ˆí˜¸, e.emp_name ë‹´ë‹¹ìëª…
+from <filenm>.tb_accnt a
+inner join <filenm>.tb_cust c on a.cust_no=c.cust_no
+inner join <filenm>.tb_prod p on a.prod_cd=p.prod_cd
+inner join <filenm>.tb_emp e on a.manager=e.emp_no;
 
-select count(emp_name) from cslee.tb_emp;
+select count(emp_name) from <filenm>.tb_emp;
 
-select count(org_name) from cslee.tb_org;
+select count(org_name) from <filenm>.tb_org;
 
 select e.emp_name, o.org_name
-from cslee.tb_emp e cross join cslee.tb_org o
+from <filenm>.tb_emp e cross join <filenm>.tb_org o
 order by emp_name;
 
 select count(e.emp_name)
-from cslee.tb_emp e cross join cslee.tb_org o;
+from <filenm>.tb_emp e cross join <filenm>.tb_org o;
 
-select e.emp_no »ç¹ø, e.emp_name »ç¿ø¸í,
-	   e.position Á÷Ã¥, o.org_name ºÎ¼­¸í
-from cslee.tb_emp e left outer join cslee.tb_org o
+select e.emp_no ì‚¬ë²ˆ, e.emp_name ì‚¬ì›ëª…,
+	   e.position ì§ì±…, o.org_name ë¶€ì„œëª…
+from <filenm>.tb_emp e left outer join <filenm>.tb_org o
 		 on e.org_cd=o.org_cd
-where e.position='»ç¿ø';
+where e.position='ì‚¬ì›';
 
-select e.emp_no »ç¹ø, e.emp_name »ç¿ø¸í, e.position Á÷Ã¥, o.org_name ºÎ¼­¸í
-from cslee.tb_org o right outer join cslee.tb_emp e
+select e.emp_no ì‚¬ë²ˆ, e.emp_name ì‚¬ì›ëª…, e.position ì§ì±…, o.org_name ë¶€ì„œëª…
+from <filenm>.tb_org o right outer join <filenm>.tb_emp e
 		on e.org_cd=o.org_cd
-where e.position='»ç¿ø';
+where e.position='ì‚¬ì›';
 
 select a.org_cd, a.org_name, b.org_cd, b.org_name
-from cslee.tb_org a full outer join cslee.tb_org b
+from <filenm>.tb_org a full outer join <filenm>.tb_org b
 on a.org_cd=b.org_cd;
 
 select a.org_cd, a.org_name, b.org_cd, b.org_name
-from cslee. tb_org a left outer join cslee.tb_org b
+from <filenm>. tb_org a left outer join <filenm>.tb_org b
 on a.org_cd=b.org_cd
 union
 select a.org_cd, a.org_name, b.org_cd, b.org_name
-from cslee.tb_org a right outer join cslee.tb_org b
+from <filenm>.tb_org a right outer join <filenm>.tb_org b
 on a.org_cd=b.org_cd;
