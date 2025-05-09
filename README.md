@@ -1,3 +1,6 @@
-# Data-Analysis-Specialized-Course<br>
+# Data Analysis Specialized Course<br>
 <br>
-I studied data analysis in the Data Analysis Specialized Course promoted by the MOIS and NIA in 2022.<br>
+Course Completion
+May 2022-Feb 2023
+Fundamentals of Data analysis, R programming, Statistics and SQL
+promoted by the MOIS and NIA<br>
